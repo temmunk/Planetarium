@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
@@ -13,7 +14,15 @@ public class LoginSteps {
 
     @Given("user is on the login page")
     public void user_is_on_the_login_page() {
-        TestRunner.loginPage.openLoginPage();
+        try {
+            Alert alert = TestRunner.wait.until(ExpectedConditions.alertIsPresent());
+            System.out.println("Unexpected alert during login: " + alert.getText());
+            alert.accept();
+        }
+        catch (TimeoutException e) {
+            TestRunner.loginPage.openLoginPage();
+        }
+
     }
 
     @When("the user provides valid login username")
@@ -33,7 +42,7 @@ public class LoginSteps {
 
     @Then("user should be redirected to the home page")
     public void user_should_be_redirected_to_the_home_page() {
-        try{
+
             TestRunner.wait.until(ExpectedConditions.titleIs("Home"));
             Assert.assertEquals(
                     String.format(
@@ -43,9 +52,7 @@ public class LoginSteps {
                     "Welcome to the Home Page Batman",
                     TestRunner.homePage.getHomePageGreeting());
             Assert.assertEquals(4, TestRunner.homePage.getNumberOfCelestialRows());
-        } finally {
-            TestRunner.homePage.logout();
-        }
+
 
     }
 

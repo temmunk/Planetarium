@@ -48,8 +48,15 @@ public class DeleteSteps {
     }
 
 
-    @When("the user deletes planet or moon {string}")
-    public void the_user_deletes_planet_or_moon_with_invalid_data(String name) {
+    @When("the user deletes moon {string}")
+    public void the_user_deletes_moon_with_invalid_data(String name) {
+        TestRunner.homePage.selectMoonInput();
+        TestRunner.homePage.enterNameToDelete(name);
+    }
+
+    @When("the user deletes planet {string}")
+    public void the_user_deletes_planet_with_invalid_data(String name) {
+        TestRunner.homePage.selectPlanetInput();
         TestRunner.homePage.enterNameToDelete(name);
     }
 

@@ -6,13 +6,21 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegisterSteps {
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
-        TestRunner.loginPage.openLoginPage();
+        try {
+            Alert alert = TestRunner.wait.until(ExpectedConditions.alertIsPresent());
+            System.out.println("Unexpected alert during login: " + alert.getText());
+            alert.accept();
+        }
+        catch (TimeoutException e) {
+            TestRunner.loginPage.openLoginPage();
+        }
     }
 
     @Given("the user clicks the register link")

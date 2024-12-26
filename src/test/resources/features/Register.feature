@@ -1,3 +1,4 @@
+@US1 @SR1
 Feature: User Registration
   As a new user I want to open an account with the Planetarium so I can save my celestial findings
 
