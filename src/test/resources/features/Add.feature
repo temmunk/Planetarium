@@ -20,8 +20,8 @@ Feature: As a user I want to add new planets and moons to the Planetarium so I c
 
       |name       | planetId  |error message       |
       |Moon!      |  1        |Invalid moon name   |
-      |Planet!    |  2        |Invalid moon name   |
       |MoonTest   |  5        |Invalid planet ID   |
+      |Planet!    |  2        |Invalid moon name   |
 
     Scenario Outline: User adds invalid Planet
       When the user inputs invalid planet name "<name>"

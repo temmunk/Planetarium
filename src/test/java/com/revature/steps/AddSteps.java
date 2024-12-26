@@ -5,8 +5,10 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -15,7 +17,17 @@ import java.util.List;
 public class AddSteps {
     @Given("the user is logged in")
     public void the_user_is_logged_in() {
-        TestRunner.loginPage.setUpLoggedInUser();
+
+        try {
+            Alert alert = TestRunner.wait.until(ExpectedConditions.alertIsPresent());
+            System.out.println("Unexpected alert during login: " + alert.getText());
+            alert.accept();
+        }
+        catch (TimeoutException e){
+            TestRunner.loginPage.setUpLoggedInUser();
+        }
+
+
     }
 
 

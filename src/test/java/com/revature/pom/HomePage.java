@@ -25,8 +25,6 @@ public class HomePage {
     @FindBy(tagName = "tr")
     private List<WebElement> tableRows;
 
-//    @FindBy(id = "locationSelect")
-//    private WebElement inputSelect;
 
     @FindBy(id = "deleteInput")
     private WebElement deleteInput;
@@ -48,10 +46,6 @@ public class HomePage {
 
     @FindBy(id = "planetNameInput")
     private WebElement planetNameInput;
-
-//    WebElement dropdownElement = TestRunner.wait.until(ExpectedConditions.presenceOfElementLocated(By.tagName("select")));
-//    Select dropdown = new Select(dropdownElement);
-
 
 
 
@@ -82,14 +76,14 @@ public class HomePage {
 
     }
 
-    public Boolean checkDeleted(){
-        List<WebElement> deletedElements = driver.findElements(By.xpath("//table/tbody/tr[text()='Earth'"));
-        if (deletedElements.isEmpty()){
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    public Boolean checkDeleted(){
+//        List<WebElement> deletedElements = driver.findElements(By.xpath("//table/tbody/tr[text()='Earth'"));
+//        if (deletedElements.isEmpty()){
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     public void enterNameToDelete(String celestialBody){
         deleteInput.sendKeys(celestialBody);

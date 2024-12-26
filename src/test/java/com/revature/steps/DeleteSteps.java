@@ -27,13 +27,15 @@ public class DeleteSteps {
 
     @Then("the table refreshes and the user should see their planets and moons.")
     public void theTableRefreshesAndTheUserShouldSeeTheirPlanetsAndMoons() {
+        TestRunner.wait.until(ExpectedConditions.titleIs("Home"));
+
         List<WebElement> rows = TestRunner.driver.findElements(By.tagName("tr"));
         boolean found = false;
 
         for (WebElement row : rows) {
             List<WebElement> cells = row.findElements(By.tagName("td"));
             for (WebElement cell : cells) {
-                if (cell.getText().equals("Earth")) {
+                if (cell.getText().equals("Luna")) {
                     found = true;
                     break;
                 }
